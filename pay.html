@@ -65,19 +65,20 @@
       background: #111;
       border-radius: 30px;
       max-width: 500px;
+      width: 500px;
       padding: 40px 30px;
       box-shadow: 0 0 30px rgba(0,0,0,0.5);
       animation: fadeIn 1s ease-out;
-      flex: 1 1 500px;
+      text-align: center;
     }
     .instructions {
       max-width: 500px;
-      padding: 40px 20px;
+      width: 500px;
+      padding: 40px 30px;
       font-size: 18px;
       line-height: 1.6;
       color: #ccc;
       text-align: left;
-      flex: 1 1 500px;
     }
     h2 {
       font-size: 26px;
@@ -139,10 +140,11 @@
     <div class="wallet" id="wallet-label">TRC20 (USDT): <br><strong>TXXX-YOUR-WALLET-ADDRESS</strong></div>
     <div class="timer" id="timer">20:00</div>
 
-    <a href="javascript:void(0);" class="btn" id="check-btn" onclick="checkPayment()">Check Payment</a>
-    <div id="status"></div>
-
-    <a href="success.html" class="btn" id="paid-btn" style="pointer-events: none; opacity: 0.5;">I have paid</a>
+    <div>
+      <a href="javascript:void(0);" class="btn" id="check-btn" onclick="checkPayment()">Check Payment</a>
+      <div id="status"></div>
+      <a href="success.html" class="btn" id="paid-btn" style="pointer-events: none; opacity: 0.5;">I have paid</a>
+    </div>
   </div>
 
   <!-- Инструкция -->
