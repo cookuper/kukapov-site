@@ -18,7 +18,11 @@
       color: #fff;
       margin: 0;
       padding: 60px 20px;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      flex-wrap: wrap;
     }
     .lang-switcher {
       position: absolute;
@@ -61,7 +65,6 @@
       background: #111;
       border-radius: 30px;
       max-width: 500px;
-      margin: auto;
       padding: 40px 30px;
       box-shadow: 0 0 30px rgba(0,0,0,0.5);
       animation: fadeIn 1s ease-out;
@@ -104,6 +107,26 @@
       font-size: 18px;
       font-weight: bold;
     }
+    .instruction {
+      background: #111;
+      border-radius: 30px;
+      max-width: 500px;
+      padding: 40px 30px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      height: 600px;
+      overflow-y: auto;
+      text-align: left;
+    }
+    .instruction h3 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .instruction p {
+      font-size: 16px;
+      margin-bottom: 15px;
+      color: #ccc;
+      line-height: 1.5;
+    }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -120,6 +143,7 @@
     </div>
   </div>
 
+  <!-- Блок оплаты слева -->
   <div class="container">
     <h2 id="payment-title">Send exactly $5 in crypto to the wallet below</h2>
     <div class="wallet" id="wallet-label">TRC20 (USDT): <br><strong>TXXX-YOUR-WALLET-ADDRESS</strong></div>
@@ -129,6 +153,19 @@
     <div id="status"></div>
 
     <a href="success.html" class="btn" id="paid-btn" style="pointer-events: none; opacity: 0.5;">I have paid</a>
+  </div>
+
+  <!-- Инструкция справа -->
+  <div class="instruction">
+    <h3>How to Pay with Crypto</h3>
+    <p>1️⃣ Open your crypto wallet (Binance, Trust Wallet, TronLink, etc.).</p>
+    <p>2️⃣ Select **USDT (TRC20)** network.</p>
+    <p>3️⃣ Copy the wallet address:<br><strong>TXXX-YOUR-WALLET-ADDRESS</strong></p>
+    <p>4️⃣ Enter the exact amount: **$5 USDT**.</p>
+    <p>5️⃣ Confirm and send the transaction.</p>
+    <p>6️⃣ Wait 1-3 minutes until transaction is processed on blockchain.</p>
+    <p>7️⃣ Once sent, click "Check Payment" to verify your transaction.</p>
+    <p>8️⃣ If payment is found, you'll be able to proceed to access your service.</p>
   </div>
 
   <script>
@@ -174,10 +211,8 @@
     };
     setInterval(tick, 1000);
 
-    // Проверка оплаты
     function checkPayment() {
-      // Пока эмуляция (заглушка):
-      const paymentReceived = Math.random() > 0.5;  // тестовая симуляция проверки
+      const paymentReceived = Math.random() > 0.5;
 
       const status = document.getElementById("status");
       if (paymentReceived) {
