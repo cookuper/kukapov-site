@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KBM VPN - Thank You</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #0d0d0d url('bg-pattern.png') repeat;
+      background-size: 200px;
+      color: #fff;
+      text-align: center;
+      padding: 100px 20px;
+      animation: fadeIn 1.5s ease-out forwards;
+    }
+    .lang-switcher {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 999;
+    }
+    .toggle-container {
+      background: #111;
+      width: 80px;
+      height: 40px;
+      border-radius: 30px;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      transition: background 0.3s;
+    }
+    .toggle-label-en, .toggle-label-ru {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #fff;
+      font-weight: bold;
+      font-size: 14px;
+      pointer-events: none;
+    }
+    .toggle-label-en { left: 12px; }
+    .toggle-label-ru { right: 12px; }
+    .toggle-button {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      background: #fff;
+      border-radius: 50%;
+      top: 4px;
+      left: 4px;
+      transition: left 0.3s;
+    }
+    .message-box {
+      background: #111;
+      border-radius: 30px;
+      max-width: 500px;
+      margin: auto;
+      padding: 60px 30px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    }
+    h2 {
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 18px;
+      color: #ccc;
+      margin-bottom: 40px;
+    }
+    .btn {
+      background: #fff;
+      color: #000;
+      padding: 12px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #ddd;
+    }
+    .emoji {
+      font-size: 48px;
+      margin-top: 10px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="lang-switcher">
+    <div class="toggle-container" onclick="switchLang()">
+      <div class="toggle-label-en">EN</div>
+      <div class="toggle-label-ru">RU</div>
+      <div class="toggle-button" id="toggle-btn"></div>
+    </div>
+  </div>
+
+  <div class="message-box">
+    <h2 id="thank-title">Thank you for your purchase!</h2>
+    <p id="thank-text">Your payment has been received. We look forward to seeing you again.<br><span class="emoji">😊</span></p>
+    <a href="index.html" class="btn" id="home-btn">Return to Homepage</a>
+  </div>
+
+  <script>
+    const translations = {
+      en: {
+        thankTitle: "Thank you for your purchase!",
+        thankText: "Your payment has been received. We look forward to seeing you again.<br><span class='emoji'>😊</span>",
+        homeBtn: "Return to Homepage"
+      },
+      ru: {
+        thankTitle: "Спасибо за покупку!",
+        thankText: "Ваш платеж успешно получен. Будем рады видеть вас снова.<br><span class='emoji'>😊</span>",
+        homeBtn: "Вернуться на главную"
+      }
+    };
+
+    let lang = 'en';
+
+    function switchLang() {
+      lang = lang === 'en' ? 'ru' : 'en';
+      const t = translations[lang];
+      document.getElementById('thank-title').innerText = t.thankTitle;
+      document.getElementById('thank-text').innerHTML = t.thankText;
+      document.getElementById('home-btn').innerText = t.homeBtn;
+      document.getElementById('toggle-btn').style.left = lang === 'en' ? '4px' : '44px';
+    }
+  </script>
+</body>
+</html>

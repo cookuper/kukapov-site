@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KBM VPN</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0d0d0d url('bg-pattern.png') repeat;
+      background-size: 200px;
+      color: #fff;
+      overflow-x: hidden;
+    }
+    .lang-switcher {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 999;
+    }
+    .toggle-container {
+      background: #111;
+      width: 80px;
+      height: 40px;
+      border-radius: 30px;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      transition: background 0.3s;
+    }
+    .toggle-label-en, .toggle-label-ru {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #fff;
+      font-weight: bold;
+      font-size: 14px;
+      pointer-events: none;
+    }
+    .toggle-label-en { left: 12px; }
+    .toggle-label-ru { right: 12px; }
+    .toggle-button {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      background: #fff;
+      border-radius: 50%;
+      top: 4px;
+      left: 4px;
+      transition: left 0.3s;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 80px 20px;
+      flex-wrap: wrap;
+    }
+    .card {
+      background: #111;
+      border-radius: 30px;
+      padding: 40px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s forwards;
+    }
+    .card:nth-child(2) { animation-delay: 0.4s; }
+    h1 {
+      text-align: center;
+      font-size: 40px;
+      padding-top: 40px;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+    .desc {
+      font-size: 18px;
+      color: #ccc;
+      margin: 20px 0;
+      line-height: 1.5;
+    }
+    .extra {
+      font-size: 16px;
+      color: #aaa;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+    .features-text {
+      font-size: 17px;
+      margin-bottom: 30px;
+      color: #ccc;
+      line-height: 1.6;
+    }
+    a.buy-btn {
+      display: inline-block;
+      background: #fff;
+      color: #000;
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    a.buy-btn:hover {
+      background: #ddd;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 60px;
+      color: #777;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="lang-switcher">
+    <div class="toggle-container" onclick="switchLang()">
+      <div class="toggle-label-en">EN</div>
+      <div class="toggle-label-ru">RU</div>
+      <div class="toggle-button" id="toggle-btn"></div>
+    </div>
+  </div>
+
+  <h1 id="title">Fast. Private. Always Online.</h1>
+
+  <div class="container">
+    <div class="card">
+      <h2 id="vpn-title">VPN {KBM}</h2>
+      <p class="desc" id="desc">A blazing fast, secure and fully anonymous VPN. Instantly hides your IP and encrypts your connection worldwide.</p>
+      <p class="extra" id="extra-text">We use modern encryption standards (AES-256, WireGuard, Perfect Forward Secrecy) to ensure full privacy, prevent DPI-analysis, and guarantee stable global access.</p>
+    </div>
+
+    <div class="card">
+      <p class="features-text" id="features-text">
+        For full tariff information and subscription options — press Continue.
+      </p>
+      <a href="features.html" class="buy-btn" id="continue-btn">Continue</a>
+    </div>
+  </div>
+
+  <div class="footer" id="footer">
+    Follow us on Telegram for updates: <a href="https://t.me/kbmvpn" style="color:#fff;">@kbmvpn</a>
+  </div>
+
+  <script>
+    let lang = 'en';
+    const translations = {
+      en: {
+        title: "Fast. Private. Always Online.",
+        vpnTitle: "VPN {KBM}",
+        desc: "A blazing fast, secure and fully anonymous VPN. Instantly hides your IP and encrypts your connection worldwide.",
+        extraText: "We use modern encryption standards (AES-256, WireGuard, Perfect Forward Secrecy) to ensure full privacy, prevent DPI-analysis, and guarantee stable global access.",
+        featuresText: "For full tariff information and subscription options — press Continue.",
+        continueBtn: "Continue",
+        footer: 'Follow us on Telegram for updates: <a href="https://t.me/kbmvpn" style="color:#fff;">@kbmvpn</a>'
+      },
+      ru: {
+        title: "Быстро. Приватно. Всегда онлайн.",
+        vpnTitle: "VPN {KBM}",
+        desc: "Молниеносный, безопасный и полностью анонимный VPN. Мгновенно скрывает ваш IP и шифрует соединение по всему миру.",
+        extraText: "Современные стандарты шифрования (AES-256, WireGuard, Perfect Forward Secrecy) обеспечивают полную приватность, защиту от DPI-анализа и стабильный доступ по всему миру.",
+        featuresText: "Для получения подробной информации о тарифах — нажмите Далее.",
+        continueBtn: "Далее",
+        footer: 'Следите за нами в Telegram: <a href="https://t.me/kbmvpn" style="color:#fff;">@kbmvpn</a>'
+      }
+    };
+
+    function switchLang() {
+      lang = lang === 'en' ? 'ru' : 'en';
+      document.getElementById('title').innerText = translations[lang].title;
+      document.getElementById('vpn-title').innerText = translations[lang].vpnTitle;
+      document.getElementById('desc').innerText = translations[lang].desc;
+      document.getElementById('extra-text').innerText = translations[lang].extraText;
+      document.getElementById('features-text').innerText = translations[lang].featuresText;
+      document.getElementById('continue-btn').innerText = translations[lang].continueBtn;
+      document.getElementById('footer').innerHTML = translations[lang].footer;
+      document.getElementById('toggle-btn').style.left = lang === 'en' ? '4px' : '44px';
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KBM VPN - Pay by Card</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0d0d0d url('bg-pattern.png') repeat;
+      background-size: 200px;
+      color: #fff;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .lang-switcher {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 999;
+    }
+    .toggle-container {
+      background: #111;
+      width: 80px;
+      height: 40px;
+      border-radius: 30px;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    .toggle-label-en, .toggle-label-ru {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #fff;
+      font-weight: bold;
+      font-size: 14px;
+      pointer-events: none;
+    }
+    .toggle-label-en { left: 12px; }
+    .toggle-label-ru { right: 12px; }
+    .toggle-button {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      background: #fff;
+      border-radius: 50%;
+      top: 4px;
+      left: 4px;
+      transition: left 0.3s;
+    }
+    .container {
+      background: #111;
+      border-radius: 30px;
+      padding: 40px 30px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+    }
+    h2 {
+      font-size: 26px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    p {
+      font-size: 18px;
+      color: #ccc;
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+    .btn {
+      background: #fff;
+      color: #000;
+      padding: 12px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+      display: inline-block;
+    }
+    .btn:hover { background: #ddd; }
+  </style>
+</head>
+<body>
+
+<div class="lang-switcher">
+  <div class="toggle-container" onclick="switchLang()">
+    <div class="toggle-label-en">EN</div>
+    <div class="toggle-label-ru">RU</div>
+    <div class="toggle-button" id="toggle-btn"></div>
+  </div>
+</div>
+
+<div class="container">
+  <h2 id="pay-title">Оплата картой РФ (СБП)</h2>
+  <p id="pay-text">Вы будете перенаправлены на безопасную страницу для проведения платежа.</p>
+  <a id="pay-button" class="btn" href="#">Перейти к оплате</a>
+</div>
+
+<script>
+  let lang = 'ru';
+  function switchLang() {
+    lang = lang === 'en' ? 'ru' : 'en';
+    document.getElementById('pay-title').innerText = lang === 'en' ? "Pay with Russian Card (SBP)" : "Оплата картой РФ (СБП)";
+    document.getElementById('pay-text').innerText = lang === 'en' 
+      ? "You will be redirected to a secure payment page to complete your transaction." 
+      : "Вы будете перенаправлены на безопасную страницу для проведения платежа.";
+    document.getElementById('pay-button').innerText = lang === 'en' ? "Proceed to Payment" : "Перейти к оплате";
+    document.getElementById('toggle-btn').style.left = lang === 'en' ? '4px' : '44px';
+  }
+</script>
+
+</body>
+</html>

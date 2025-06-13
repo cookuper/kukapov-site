@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment - KBM VPN</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0d0d0d url('bg-pattern.png') repeat;
+      background-size: 200px;
+      color: #fff;
+      margin: 0;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .lang-switcher {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 999;
+    }
+    .toggle-container {
+      background: #111;
+      width: 80px;
+      height: 40px;
+      border-radius: 30px;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      transition: background 0.3s;
+    }
+    .toggle-label-en, .toggle-label-ru {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #fff;
+      font-weight: bold;
+      font-size: 14px;
+      pointer-events: none;
+    }
+    .toggle-label-en { left: 12px; }
+    .toggle-label-ru { right: 12px; }
+    .toggle-button {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      background: #fff;
+      border-radius: 50%;
+      top: 4px;
+      left: 4px;
+      transition: left 0.3s;
+    }
+    .container {
+      background: #111;
+      border-radius: 30px;
+      max-width: 500px;
+      margin: auto;
+      padding: 40px 30px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      animation: fadeIn 1s ease-out;
+    }
+    h2 {
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+    .wallet {
+      background: #1f1f1f;
+      padding: 15px;
+      border-radius: 15px;
+      font-size: 16px;
+      margin: 20px auto;
+      word-break: break-word;
+    }
+    .timer {
+      font-size: 24px;
+      color: #ff5555;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    .btn {
+      margin-top: 30px;
+      background: #fff;
+      color: #000;
+      padding: 12px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #ddd;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="lang-switcher">
+    <div class="toggle-container" onclick="switchLang()">
+      <div class="toggle-label-en">EN</div>
+      <div class="toggle-label-ru">RU</div>
+      <div class="toggle-button" id="toggle-btn"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2 id="payment-title">Send exactly $5 in crypto to the wallet below</h2>
+    <div class="wallet" id="wallet-label">TRC20 (USDT): <br><strong>TXXX-YOUR-WALLET-ADDRESS</strong></div>
+    <div class="timer" id="timer">20:00</div>
+    <a href="success.html" class="btn" id="paid-btn">I have paid</a>
+  </div>
+
+  <script>
+    const translations = {
+      en: {
+        paymentTitle: "Send exactly $5 in crypto to the wallet below",
+        walletLabel: "TRC20 (USDT): <br><strong>TXXX-YOUR-WALLET-ADDRESS</strong>",
+        paidBtn: "I have paid"
+      },
+      ru: {
+        paymentTitle: "Отправьте ровно $5 в криптовалюте на кошелёк ниже",
+        walletLabel: "TRC20 (USDT): <br><strong>TXXX-АДРЕС-КОШЕЛЬКА</strong>",
+        paidBtn: "Я оплатил"
+      }
+    };
+
+    let lang = 'en';
+
+    function switchLang() {
+      lang = lang === 'en' ? 'ru' : 'en';
+      const t = translations[lang];
+      document.getElementById('payment-title').innerText = t.paymentTitle;
+      document.getElementById('wallet-label').innerHTML = t.walletLabel;
+      document.getElementById('paid-btn').innerText = t.paidBtn;
+      document.getElementById('toggle-btn').style.left = lang === 'en' ? '4px' : '44px';
+    }
+
+    let time = 20 * 60;
+    const timerEl = document.getElementById("timer");
+    const formatTime = (sec) => {
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return m + ":" + (s < 10 ? "0" + s : s);
+    };
+    const tick = () => {
+      if (time > 0) {
+        time--;
+        timerEl.textContent = formatTime(time);
+      }
+    };
+    setInterval(tick, 1000);
+  </script>
+</body>
+</html>
