@@ -125,7 +125,7 @@
     <div class="wallet" id="wallet-label">TRC20 (USDT): <br><strong>TXXX-YOUR-WALLET-ADDRESS</strong></div>
     <div class="timer" id="timer">20:00</div>
 
-    <button class="btn" id="check-btn" onclick="checkPayment()">Check Payment</button>
+    <a href="javascript:void(0);" class="btn" id="check-btn" onclick="checkPayment()">Check Payment</a>
     <div id="status"></div>
 
     <a href="success.html" class="btn" id="paid-btn" style="pointer-events: none; opacity: 0.5;">I have paid</a>
@@ -176,7 +176,7 @@
 
     // Проверка оплаты
     function checkPayment() {
-      // пока эмуляция (заглушка):
+      // Пока эмуляция (заглушка):
       const paymentReceived = Math.random() > 0.5;  // тестовая симуляция проверки
 
       const status = document.getElementById("status");
