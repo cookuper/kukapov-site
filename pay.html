@@ -18,7 +18,11 @@
       color: #fff;
       margin: 0;
       padding: 60px 20px;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 50px;
+      flex-wrap: wrap;
     }
     .lang-switcher {
       position: absolute;
@@ -61,10 +65,19 @@
       background: #111;
       border-radius: 30px;
       max-width: 500px;
-      margin: auto;
       padding: 40px 30px;
       box-shadow: 0 0 30px rgba(0,0,0,0.5);
       animation: fadeIn 1s ease-out;
+      flex: 1 1 500px;
+    }
+    .instructions {
+      max-width: 500px;
+      padding: 40px 20px;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #ccc;
+      text-align: left;
+      flex: 1 1 500px;
     }
     h2 {
       font-size: 26px;
@@ -104,14 +117,6 @@
       font-size: 18px;
       font-weight: bold;
     }
-    .instructions {
-      max-width: 800px;
-      margin: 60px auto 0 auto;
-      font-size: 18px;
-      line-height: 1.6;
-      color: #ccc;
-      text-align: left;
-    }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -128,6 +133,7 @@
     </div>
   </div>
 
+  <!-- Блок оплаты -->
   <div class="container">
     <h2 id="payment-title">Send exactly $5 in crypto to the wallet below</h2>
     <div class="wallet" id="wallet-label">TRC20 (USDT): <br><strong>TXXX-YOUR-WALLET-ADDRESS</strong></div>
@@ -194,7 +200,6 @@
 
     function checkPayment() {
       const paymentReceived = Math.random() > 0.5;
-
       const status = document.getElementById("status");
       if (paymentReceived) {
         status.innerHTML = "<span style='color: #4CAF50;'>Payment received, you can proceed.</span>";
