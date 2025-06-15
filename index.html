@@ -89,11 +89,41 @@
       cursor: pointer;
       z-index: 10000;
     }
+    #authModal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #111;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      color: white;
+      display: none;
+      z-index: 9999;
+      width: 400px;
+    }
+    #authModal input, #authModal button {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      background: #222;
+      color: white;
+    }
+    #authOverlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      z-index: 9998;
+    }
   </style>
 </head>
 <body>
 
-  <div id="authButton">Рег / Лог</div>
+  <div id="authButton"></div>
 
   <h1>Быстро. Приватно. Всегда онлайн.</h1>
   <div class="container">
@@ -111,10 +141,88 @@
     Следите за нами в Telegram: <a href="https://t.me/kbmvpn" style="color:#fff;">@kbmvpn</a>
   </div>
 
-  <div id="authOverlay" style="display:none;"></div>
-  <div id="authModal" style="display:none;"></div>
+  <div id="authOverlay"></div>
+  <div id="authModal"></div>
 
   <script src="auth.js"></script>
 
+  <script>
+    const modal = document.getElementById("authModal");
+    const overlay = document.getElementById("authOverlay");
+    const button = document.getElementById("authButton");
+
+    function renderAuth() {
+      if (isLoggedIn()) {
+        button.textContent = getUsername() + " — Профиль";
+        button.onclick = () => {
+          if (confirm("Выйти из аккаунта?")) logout();
+        };
+      } else {
+        button.textContent = "Рег / Лог";
+        button.onclick = () => openAuthModal();
+      }
+    }
+
+    function openAuthModal() {
+      modal.style.display = "block";
+      overlay.style.display = "block";
+      modal.innerHTML = `
+        <h3>Регистрация</h3>
+        <input id="username" placeholder="Никнейм" />
+        <input id="email" placeholder="Email" />
+        <input id="password" type="password" placeholder="Пароль" />
+        <button onclick="handleRegister()">Получить код</button>
+        <div id="verifySection" style="display:none;">
+          <input id="code" placeholder="Код из письма" />
+          <button onclick="handleVerify()">Подтвердить</button>
+        </div>
+        <div id="loginSection" style="margin-top:20px;">
+          <h3>Вход</h3>
+          <input id="loginEmail" placeholder="Email" />
+          <input id="loginPassword" type="password" placeholder="Пароль" />
+          <button onclick="handleLogin()">Войти</button>
+        </div>
+        <button style="margin-top:15px;" onclick="closeAuthModal()">Закрыть</button>
+      `;
+    }
+
+    function closeAuthModal() {
+      modal.style.display = "none";
+      overlay.style.display = "none";
+    }
+
+    async function handleRegister() {
+      const username = document.getElementById("username").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const res = await register(username, email, password);
+      alert(res.message);
+      if (res.message.includes("Код отправлен")) {
+        document.getElementById("verifySection").style.display = "block";
+      }
+    }
+
+    async function handleVerify() {
+      const email = document.getElementById("email").value;
+      const code = document.getElementById("code").value;
+      const res = await verify(email, code);
+      alert(res.message);
+    }
+
+    async function handleLogin() {
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+      const res = await login(email, password);
+      if (res.token) {
+        alert("Успешный вход");
+        closeAuthModal();
+        renderAuth();
+      } else {
+        alert(res.message);
+      }
+    }
+
+    renderAuth();
+  </script>
 </body>
 </html>
