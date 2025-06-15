@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,43 +22,6 @@
       align-items: flex-start;
       gap: 50px;
       flex-wrap: wrap;
-    }
-    .lang-switcher {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      z-index: 999;
-    }
-    .toggle-container {
-      background: #111;
-      width: 80px;
-      height: 40px;
-      border-radius: 30px;
-      position: relative;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-      transition: background 0.3s;
-    }
-    .toggle-label-en, .toggle-label-ru {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #fff;
-      font-weight: bold;
-      font-size: 14px;
-      pointer-events: none;
-    }
-    .toggle-label-en { left: 12px; }
-    .toggle-label-ru { right: 12px; }
-    .toggle-button {
-      position: absolute;
-      width: 32px;
-      height: 32px;
-      background: #fff;
-      border-radius: 50%;
-      top: 4px;
-      left: 4px;
-      transition: left 0.3s;
     }
     .container {
       background: #111;
@@ -125,31 +88,23 @@
 </head>
 <body>
 
-  <div class="lang-switcher">
-    <div class="toggle-container" onclick="switchLang()">
-      <div class="toggle-label-en">EN</div>
-      <div class="toggle-label-ru">RU</div>
-      <div class="toggle-button" id="toggle-btn"></div>
-    </div>
-  </div>
-
   <!-- Блок оплаты -->
   <div class="container">
-    <h2 id="payment-title">Send exactly $5 in crypto to the wallet below</h2>
-    <div class="wallet" id="wallet-label">TRC20 (USDT): <br><strong>TXXX-YOUR-WALLET-ADDRESS</strong></div>
+    <h2>Отправьте ровно $5 в криптовалюте на кошелёк ниже</h2>
+    <div class="wallet">TRC20 (USDT): <br><strong>TXXX-АДРЕС-КОШЕЛЬКА</strong></div>
     <div class="timer" id="timer">20:00</div>
 
     <div>
-      <a href="javascript:void(0);" class="btn" id="check-btn" onclick="checkPayment()">Check Payment</a>
+      <a href="javascript:void(0);" class="btn" id="check-btn" onclick="checkPayment()">Проверить оплату</a>
       <div id="status"></div>
-      <a href="success.html" class="btn" id="paid-btn" style="pointer-events: none; opacity: 0.5;">I have paid</a>
+      <a href="success.html" class="btn" id="paid-btn" style="pointer-events: none; opacity: 0.5;">Я оплатил</a>
     </div>
   </div>
 
   <!-- Инструкция -->
   <div class="instructions">
     <p>Для оплаты переведите ровно 5 USDT в сети TRC20 на указанный выше кошелек.</p>
-    <p>Используйте любую биржу или кошелек поддерживающий TRC20 (например, Binance, Trust Wallet, TronLink и т.д.).</p>
+    <p>Используйте любую биржу или кошелек, поддерживающий TRC20 (например, Binance, Trust Wallet, TronLink и т.д.).</p>
     <p>После перевода дождитесь подтверждения транзакции в сети (обычно 1-3 минуты).</p>
     <p>После отправки нажмите кнопку "Проверить оплату", чтобы проверить статус транзакции.</p>
     <p>Если оплата прошла успешно — кнопка "Я оплатил" станет активной и вы перейдете дальше.</p>
@@ -157,33 +112,6 @@
   </div>
 
   <script>
-    const translations = {
-      en: {
-        paymentTitle: "Send exactly $5 in crypto to the wallet below",
-        walletLabel: "TRC20 (USDT): <br><strong>TXXX-YOUR-WALLET-ADDRESS</strong>",
-        paidBtn: "I have paid",
-        checkBtn: "Check Payment"
-      },
-      ru: {
-        paymentTitle: "Отправьте ровно $5 в криптовалюте на кошелёк ниже",
-        walletLabel: "TRC20 (USDT): <br><strong>TXXX-АДРЕС-КОШЕЛЬКА</strong>",
-        paidBtn: "Я оплатил",
-        checkBtn: "Проверить оплату"
-      }
-    };
-
-    let lang = 'en';
-
-    function switchLang() {
-      lang = lang === 'en' ? 'ru' : 'en';
-      const t = translations[lang];
-      document.getElementById('payment-title').innerText = t.paymentTitle;
-      document.getElementById('wallet-label').innerHTML = t.walletLabel;
-      document.getElementById('paid-btn').innerText = t.paidBtn;
-      document.getElementById('check-btn').innerText = t.checkBtn;
-      document.getElementById('toggle-btn').style.left = lang === 'en' ? '4px' : '44px';
-    }
-
     let time = 20 * 60;
     const timerEl = document.getElementById("timer");
     const formatTime = (sec) => {
@@ -203,12 +131,12 @@
       const paymentReceived = Math.random() > 0.5;
       const status = document.getElementById("status");
       if (paymentReceived) {
-        status.innerHTML = "<span style='color: #4CAF50;'>Payment received, you can proceed.</span>";
+        status.innerHTML = "<span style='color: #4CAF50;'>Платёж получен, можно продолжать.</span>";
         const paidBtn = document.getElementById("paid-btn");
         paidBtn.style.pointerEvents = "auto";
         paidBtn.style.opacity = "1";
       } else {
-        status.innerHTML = "<span style='color: #ff5555;'>Payment not found. Please wait and try again.</span>";
+        status.innerHTML = "<span style='color: #ff5555;'>Платёж не найден. Подождите и попробуйте ещё раз.</span>";
       }
     }
   </script>
