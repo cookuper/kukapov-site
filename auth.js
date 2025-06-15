@@ -1,40 +1,52 @@
 const API_URL = "http://85.192.63.163:5000";
 
 async function register(username, email, password) {
-  const res = await fetch(`${API_URL}/register`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, email, password })
-  });
+  try {
+    const res = await fetch(`${API_URL}/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, email, password })
+    });
 
-  return res.json();
+    return await res.json();
+  } catch (err) {
+    return { message: "Ошибка сети при регистрации" };
+  }
 }
 
 async function verify(email, code) {
-  const res = await fetch(`${API_URL}/verify`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, code })
-  });
+  try {
+    const res = await fetch(`${API_URL}/verify`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, code })
+    });
 
-  return res.json();
+    return await res.json();
+  } catch (err) {
+    return { message: "Ошибка сети при верификации" };
+  }
 }
 
 async function login(email, password) {
-  const res = await fetch(`${API_URL}/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password })
-  });
+  try {
+    const res = await fetch(`${API_URL}/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
 
-  const data = await res.json();
+    const data = await res.json();
 
-  if (res.ok) {
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("username", data.username);
+    if (res.ok) {
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("username", data.username);
+    }
+
+    return data;
+  } catch (err) {
+    return { message: "Ошибка сети при входе" };
   }
-
-  return data;
 }
 
 function logout() {
