@@ -9,7 +9,10 @@
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -34,14 +37,14 @@
       box-shadow: 0 0 30px rgba(0,0,0,0.5);
       opacity: 0;
       transform: translateY(30px);
-      animation: fadeInUp 1s forwards;
+      animation: fadeInUp 0.8s forwards;
     }
-    .card:nth-child(2) { animation-delay: 0.4s; }
+    .card:nth-child(2) { animation-delay: 0.3s; }
     h1 {
       text-align: center;
       font-size: 40px;
       padding-top: 40px;
-      animation: fadeIn 1s ease-in-out forwards;
+      animation: fadeIn 0.8s ease-in-out forwards;
     }
     .desc {
       font-size: 18px;
@@ -71,48 +74,31 @@
       text-decoration: none;
       transition: background 0.3s;
     }
-    a.buy-btn:hover {
-      background: #ddd;
-    }
+    a.buy-btn:hover { background: #ddd; }
     .footer {
       text-align: center;
       margin-top: 60px;
       color: #777;
     }
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
-
   <h1>Быстро. Приватно. Всегда онлайн.</h1>
-
   <div class="container">
     <div class="card">
       <h2>VPN {KBM}</h2>
       <p class="desc">Молниеносный, безопасный и полностью анонимный VPN. Мгновенно скрывает ваш IP и шифрует соединение по всему миру.</p>
       <p class="extra">Современные стандарты шифрования (AES-256, WireGuard, Perfect Forward Secrecy) обеспечивают полную приватность, защиту от DPI-анализа и стабильный доступ по всему миру.</p>
     </div>
-
     <div class="card">
-      <p class="features-text">
-        Для получения подробной информации о тарифах — нажмите Далее.
-      </p>
+      <p class="features-text">Для получения подробной информации о тарифах — нажмите Далее.</p>
       <a href="features.html" class="buy-btn">Далее</a>
     </div>
   </div>
-
   <div class="footer">
     Следите за нами в Telegram: <a href="https://t.me/kbmvpn" style="color:#fff;">@kbmvpn</a>
   </div>
-
 </body>
 </html>
