@@ -9,7 +9,10 @@
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -42,10 +45,7 @@
       color: #ccc;
       text-align: left;
     }
-    h2 {
-      font-size: 26px;
-      margin-bottom: 20px;
-    }
+    h2 { font-size: 26px; margin-bottom: 20px; }
     .wallet {
       background: #1f1f1f;
       padding: 15px;
@@ -72,9 +72,7 @@
       transition: background 0.3s;
       cursor: pointer;
     }
-    .btn:hover {
-      background: #ddd;
-    }
+    .btn:hover { background: #ddd; }
     #status {
       margin-top: 20px;
       font-size: 18px;
@@ -88,12 +86,10 @@
 </head>
 <body>
 
-  <!-- Блок оплаты -->
   <div class="container">
     <h2>Отправьте ровно $5 в криптовалюте на кошелёк ниже</h2>
     <div class="wallet">TRC20 (USDT): <br><strong>TXXX-АДРЕС-КОШЕЛЬКА</strong></div>
     <div class="timer" id="timer">20:00</div>
-
     <div>
       <a href="javascript:void(0);" class="btn" id="check-btn" onclick="checkPayment()">Проверить оплату</a>
       <div id="status"></div>
@@ -101,7 +97,6 @@
     </div>
   </div>
 
-  <!-- Инструкция -->
   <div class="instructions">
     <p>Для оплаты переведите ровно 5 USDT в сети TRC20 на указанный выше кошелек.</p>
     <p>Используйте любую биржу или кошелек, поддерживающий TRC20 (например, Binance, Trust Wallet, TronLink и т.д.).</p>
@@ -126,7 +121,6 @@
       }
     };
     setInterval(tick, 1000);
-
     function checkPayment() {
       const paymentReceived = Math.random() > 0.5;
       const status = document.getElementById("status");
